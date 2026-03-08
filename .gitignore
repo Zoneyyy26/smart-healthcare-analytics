@@ -11,6 +11,10 @@ venv/
 # Jupyter
 .ipynb_checkpoints
 
+# Test artifacts
+tests/.artifacts/
+tests/.tmp/
+
 # Data
 data/*
 !data/.gitkeep

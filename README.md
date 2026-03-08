@@ -1,30 +1,78 @@
 # Smart Healthcare Analytics System
 
 ## Overview
-A data-driven healthcare application that predicts the risk of chronic diseases
-(e.g., diabetes, heart disease) based on patient metrics.
-It combines **AI**, **Statistics**, **Graph Theory**, and **Software Engineering**
-to deliver early-warning insights for doctors and clinics.
+This project trains a baseline machine-learning model to predict diabetes risk from patient metrics and serves predictions through a Flask API.
 
-## Objectives
-- Analyze patient data to identify key risk factors.
-- Train ML models for disease risk prediction.
-- Provide explainable visualizations and comorbidity networks.
-- Develop a secure, user-friendly web interface.
+## What is Included
+- Data preprocessing utilities (`src/utils/preprocess.py`)
+- Deterministic synthetic dataset generator for demo/testing (`src/utils/data_factory.py`)
+- Training pipeline with model selection (Logistic Regression vs Random Forest) (`src/train.py`)
+- Flask API for health check and prediction (`src/app.py`)
+- Automated tests for preprocessing, training, and API behavior (`tests/`)
 
-## Team
-| Name | Role | Main Responsibilities |
-|------|------|-----------------------|
-| Member 1 | Backend & Deployment | API, Database, Docker |
-| Member 2 | Data Science | Data prep, ML models, EDA |
-| Member 3 | Frontend & Docs | UI, Poster, Reports |
+## Repository Structure
+- `src/` - training and API code
+- `src/utils/` - preprocessing and dataset generation helpers
+- `docs/` - data summary artifacts
+- `notebooks/` - exploratory notebook(s)
+- `tests/` - automated tests
+- `data/` - local datasets (ignored in git)
+- `models/` - trained artifacts (ignored in git)
 
-## Folder Structure
-See `/src`, `/notebooks`, `/data`, `/docs`.
+## Quick Start (Windows PowerShell)
+1. Install dependencies:
+```powershell
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
+```
 
-## Setup
-```bash
-git clone https://github.com/<yourteam>/smart-healthcare-analytics.git
-cd smart-healthcare-analytics
-pip install -r requirements.txt
-python setup_environment.py
+2. Validate environment:
+```powershell
+.\venv\Scripts\python.exe setup_environment.py
+```
+
+3. Train model:
+```powershell
+.\venv\Scripts\python.exe -m src.train
+```
+
+If `data/diabetes.csv` is missing, training auto-generates a synthetic dataset at that path.
+
+4. Run API:
+```powershell
+.\venv\Scripts\python.exe -m src.app
+```
+
+## API Endpoints
+- `GET /health`
+- `POST /predict`
+
+Example request body for `/predict`:
+
+```json
+{
+  "Pregnancies": 2,
+  "Glucose": 130,
+  "BloodPressure": 70,
+  "SkinThickness": 25,
+  "Insulin": 90,
+  "BMI": 31.2,
+  "DiabetesPedigreeFunction": 0.45,
+  "Age": 35
+}
+```
+
+## Train with a Real Dataset
+If you have a real dataset, place it at `data/diabetes.csv` (target column: `Outcome`) and run:
+
+```powershell
+.\venv\Scripts\python.exe -m src.train --dataset-path data/diabetes.csv --target-col Outcome
+```
+
+## Run Tests
+```powershell
+.\venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+## Notes
+- Synthetic data is for demo/testing only and is not clinical evidence.
+- The Flask server is development-grade and should be replaced with a production WSGI server for deployment.
