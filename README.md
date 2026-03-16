@@ -1,5 +1,7 @@
 # Smart Healthcare Analytics System
 
+"Smart Healthcare Analytics – A Flask web app for predicting diabetes risk from user inputs, generating patient reports, and visualizing model insights using a trained scikit-learn model."
+
 ## Overview
 This project trains a baseline machine-learning model to predict diabetes risk from patient metrics and serves predictions through a Flask API.
 
