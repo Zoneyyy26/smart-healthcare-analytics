@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Smart Healthcare Analytics</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='logo.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    <style>
+        .shell {
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+        }
+
+        .side {
+            padding: 2.6rem 2.2rem;
+            background:
+                linear-gradient(132deg, rgba(19, 124, 114, 0.96), rgba(31, 155, 143, 0.92)),
+                radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.28), transparent 45%);
+            color: #ecfffb;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .side .sha-brand img {
+            box-shadow: 0 7px 16px rgba(9, 52, 48, 0.22);
+        }
+
+        .side h1 {
+            font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+            line-height: 1.08;
+            margin-top: 0.6rem;
+        }
+
+        .side p {
+            max-width: 30ch;
+            color: #d7f6ef;
+            line-height: 1.5;
+        }
+
+        .badge {
+            margin-top: auto;
+            border: 1px solid rgba(255, 255, 255, 0.34);
+            border-radius: 12px;
+            padding: 0.78rem 0.9rem;
+            background: rgba(255, 255, 255, 0.12);
+            font-size: 0.86rem;
+            line-height: 1.45;
+        }
+
+        .panel {
+            padding: 2.2rem;
+        }
+
+        .panel h2 {
+            font-size: 1.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .sub {
+            color: var(--sha-muted);
+            margin-bottom: 1.4rem;
+            font-size: 0.95rem;
+        }
+
+        .sha-alert-error {
+            margin-bottom: 1rem;
+        }
+
+        .sha-field {
+            margin-bottom: 0.92rem;
+        }
+
+        .sha-input {
+            width: 100%;
+            padding: 0.72rem 0.86rem;
+            font-size: 0.95rem;
+        }
+
+        .sha-btn {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            margin-top: 0.4rem;
+        }
+
+        .register-box {
+            margin-top: 1rem;
+            border: 1px solid #d2e2dd;
+            border-radius: 11px;
+            background: #f6fbf9;
+            padding: 0.85rem;
+            font-size: 0.86rem;
+            color: #506b65;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .register-box a {
+            color: #0e6c63;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register-box a:hover {
+            text-decoration: underline;
+        }
+
+        .foot {
+            margin-top: 1rem;
+            color: #6d8882;
+            font-size: 0.78rem;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .shell {
+                grid-template-columns: 1fr;
+            }
+
+            .side {
+                padding: 1.7rem 1.4rem;
+            }
+
+            .panel {
+                padding: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body class="sha-bg">
+<main class="sha-center">
+<section class="sha-shell shell sha-float-in">
+    <aside class="side">
+        <div class="sha-brand">
+            <img src="{{ url_for('static', filename='logo.svg') }}" alt="Smart Healthcare logo">
+            <span>Smart Healthcare Analytics</span>
+        </div>
+        <h1 class="sha-title">Clinical Intelligence for Everyday Care</h1>
+        <p>Sign in to run diabetes risk checks, inspect model insights, and track patient prediction history.</p>
+        <div class="badge">
+            <strong>Admin access</strong><br>
+            Username: <code>admin</code><br>
+            Password: <code>admin123</code>
+        </div>
+    </aside>
+
+    <section class="panel">
+        <h2 class="sha-title">Sign In</h2>
+        <p class="sub">Use your credentials to continue.</p>
+
+        {% if error %}
+        <div class="sha-alert-error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="/login">
+            <div class="sha-field">
+                <label>Username</label>
+                <input class="sha-input" type="text" name="username" placeholder="Enter username" required autofocus>
+            </div>
+            <div class="sha-field">
+                <label>Password</label>
+                <input class="sha-input" type="password" name="password" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="sha-btn">Sign In</button>
+        </form>
+
+        <div class="register-box">
+            New user? <a href="/register">Create an account</a>
+        </div>
+        <p class="foot">Prepared by Saksham</p>
+    </section>
+</section>
+</main>
+</body>
+</html>

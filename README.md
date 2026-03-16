@@ -45,6 +45,15 @@ If `data/diabetes.csv` is missing, training auto-generates a synthetic dataset a
 ## API Endpoints
 - `GET /health`
 - `POST /predict`
+- `POST /api/analyze-report`
+- `GET /api/predictions`
+- `GET /api/predictions/summary`
+- `GET /api/interactions`
+- `GET /api/interactions/summary`
+
+## Database
+- Default SQLite database path: `data/user_interactions.db`
+- Core tables: `users`, `predictions`, `reports`, `user_interactions`
 
 Example request body for `/predict`:
 

@@ -7,3 +7,5 @@ networkx
 flask
 joblib
 jupyter
+flask-cors
+gunicorn

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Smart Healthcare Analytics</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='logo.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    <style>
+        .card {
+            width: min(760px, 100%);
+            padding: 2.1rem;
+        }
+
+        .sha-brand {
+            margin-bottom: 1rem;
+            color: #285752;
+        }
+
+        .sha-brand img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            margin-bottom: 0.35rem;
+            color: #18423d;
+        }
+
+        .sub {
+            color: var(--sha-muted);
+            margin-bottom: 1.2rem;
+            max-width: 62ch;
+        }
+
+        .sha-alert-error,
+        .sha-alert-success {
+            margin-bottom: 1rem;
+        }
+
+        .role-label {
+            margin-bottom: 0.48rem;
+            display: block;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #5e7973;
+            font-weight: 700;
+        }
+
+        .role-group {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.56rem;
+            margin-bottom: 1rem;
+        }
+
+        .role-option {
+            position: relative;
+            display: block;
+        }
+
+        .role-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .role-option span {
+            display: block;
+            border: 1px solid #cdded8;
+            border-radius: 10px;
+            background: #f4fbf8;
+            color: #3f625d;
+            padding: 0.62rem 0.6rem;
+            text-align: center;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s, color 0.2s;
+        }
+
+        .role-option input:checked + span {
+            border-color: #1f9b8f;
+            background: rgba(31, 155, 143, 0.18);
+            color: #134b45;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.84rem;
+        }
+
+        .sha-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.34rem;
+        }
+
+        .sha-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .sha-input {
+            width: 100%;
+            padding: 0.72rem 0.84rem;
+        }
+
+        .sha-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .bottom {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.86rem;
+            color: #5f7a74;
+        }
+
+        .bottom a {
+            color: #0e6c63;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .bottom a:hover {
+            text-decoration: underline;
+        }
+
+        .foot {
+            margin-top: 0.95rem;
+            text-align: center;
+            font-size: 0.78rem;
+            color: #6b8781;
+        }
+
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.4rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .role-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="sha-bg">
+<main class="sha-center">
+<section class="sha-card card sha-float-in">
+    <div class="sha-brand">
+        <img src="{{ url_for('static', filename='logo.svg') }}" alt="Smart Healthcare logo">
+        <span>Smart Healthcare Analytics</span>
+    </div>
+
+    <h1 class="sha-title">Create Your Account</h1>
+    <p class="sub">Register to access risk prediction tools, patient history tracking, and report analytics.</p>
+
+    {% if error %}
+    <div class="sha-alert-error">{{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+    <div class="sha-alert-success">{{ success }}</div>
+    {% endif %}
+
+    <form method="POST" action="/register">
+        <label class="role-label">Select Role</label>
+        <div class="role-group">
+            <label class="role-option">
+                <input type="radio" name="role" value="patient" checked>
+                <span>Patient</span>
+            </label>
+            <label class="role-option">
+                <input type="radio" name="role" value="doctor">
+                <span>Doctor</span>
+            </label>
+            <label class="role-option">
+                <input type="radio" name="role" value="admin">
+                <span>Admin</span>
+            </label>
+        </div>
+
+        <div class="grid">
+            <div class="sha-field">
+                <label>First Name</label>
+                <input class="sha-input" type="text" name="first_name" placeholder="Arjun" required>
+            </div>
+            <div class="sha-field">
+                <label>Last Name</label>
+                <input class="sha-input" type="text" name="last_name" placeholder="Sharma">
+            </div>
+            <div class="sha-field full">
+                <label>Email Address</label>
+                <input class="sha-input" type="email" name="email" placeholder="arjun@example.com" required>
+            </div>
+            <div class="sha-field full">
+                <label>Username</label>
+                <input class="sha-input" type="text" name="username" placeholder="Choose a username" required>
+            </div>
+            <div class="sha-field">
+                <label>Password</label>
+                <input class="sha-input" type="password" name="password" placeholder="Minimum 6 characters" required>
+            </div>
+            <div class="sha-field">
+                <label>Confirm Password</label>
+                <input class="sha-input" type="password" name="confirm_password" placeholder="Re-enter password" required>
+            </div>
+        </div>
+
+        <button type="submit" class="sha-btn">Create Account</button>
+    </form>
+
+    <p class="bottom">Already registered? <a href="/login">Sign in here</a></p>
+    <p class="foot">Prepared by Saksham</p>
+</section>
+</main>
+</body>
+</html>

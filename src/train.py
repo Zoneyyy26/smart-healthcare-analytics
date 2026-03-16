@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
+
+# Add project root to sys.path to allow direct execution
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import joblib
 from sklearn.ensemble import RandomForestClassifier
