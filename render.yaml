@@ -7,6 +7,6 @@ services:
     startCommand: gunicorn --bind 0.0.0.0:$PORT src.app:create_app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11
+        value: 3.11.0
       - key: SECRET_KEY
         value: smarthealthcare-secret-2026
